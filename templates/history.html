@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>سجل صيانة وكالة H S F</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma; background-color: #f8e1f4; margin: 0; padding: 0; }
+        .header { background-color: #8a2be2; color: white; text-align: center; padding: 30px; border-bottom: 6px solid #ff69b4; }
+        .container { max-width: 1000px; margin: 30px auto; background: white; padding: 25px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border: 2px solid #8a2be2; }
+        h2 { color: #8a2be2; border-bottom: 2px solid #f8e1f4; padding-bottom: 10px; text-align: center; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; border-radius: 10px; overflow: hidden; }
+        th { background-color: #ff69b4; color: white; padding: 15px; font-size: 14px; }
+        td { border-bottom: 1px solid #eee; padding: 12px; text-align: center; color: #555; }
+        tr:nth-child(even) { background-color: #fff9fe; }
+        .footer-note { background: #fff0f5; border-right: 6px solid #8a2be2; padding: 20px; margin-top: 30px; border-radius: 5px; color: #333; line-height: 1.8; }
+        .back-btn { display: block; width: 200px; margin: 20px auto; text-align: center; text-decoration: none; color: white; background: #8a2be2; padding: 10px; border-radius: 10px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>وكالة H S F للصيانة</h1>
+        <p>بوابة المالك للاستعلام عن الصيانة</p>
+    </div>
+    <div class="container">
+        <h2>سجل الصيانة والبيانات الفنية</h2>
+        {% if history %}
+        <table>
+            <thead>
+                <tr>
+                    <th>اسم المالك</th>
+                    <th>نوع السيارة</th>
+                    <th>رقم اللوحة</th>
+                    <th>نوع الخدمة</th>
+                    <th>المبلغ الإجمالي</th>
+                    <th>التاريخ القادم</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in history %}
+                <tr>
+                    <td>{{ row[3] }}</td>
+                    <td>{{ row[4] }}</td>
+                    <td>{{ row[1] }}</td>
+                    <td>{{ row[7] }}</td>
+                    <td style="font-weight:bold; color:#d81b60;">{{ row[11] }} ريال</td>
+                    <td style="color:#8a2be2; font-weight:bold;">{{ row[13] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p style="text-align:center; color:red; font-size:18px;">❌ لم يتم العثور على بيانات لهذه السيارة. تأكد من اللوحة أو الرقم التسلسلي.</p>
+        {% endif %}
+        <div class="footer-note">
+            <strong>⚠️ ملاحظة هامة قبل استلام السيارة:</strong><br>
+            شكراً لثقتكم بنا. نرجو إبراز <strong>رخصة السير</strong> و <strong>الهوية الوطنية</strong> لاستلام السيارة.
+        </div>
+        <a href="/" class="back-btn">عودة للبحث</a>
+    </div>
+</body>
+</html>
